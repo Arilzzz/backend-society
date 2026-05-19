@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Society extends Model
 {
 
-    protected $table = 'societies';
-
     public $timestamps = false;
 
     protected $guarded = ['id'];
@@ -16,5 +14,14 @@ class Society extends Model
     public function regional()
     {
         return $this->belongsTo(Regional::class);
+    }
+
+    public function consultation()
+    {
+        return $this->hasOne(Consultation::class);
+    }
+    public function Vaccinations()
+    {
+        return $this->hasMany(Consultation::class);
     }
 }

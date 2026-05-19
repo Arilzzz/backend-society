@@ -29,8 +29,8 @@ class AuthMiddleware
             ], 401);
         }
 
-        // simpan data society ke request
-        $request->society = $society;
+        // simpan data society ke request sebagai atribut, karena Request tidak mendukung properti dinamis
+        $request->attributes->set('society', $society);
 
         return $next($request);
     }

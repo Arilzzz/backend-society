@@ -8,13 +8,16 @@ class Consultation extends Model
 {
     public $timestamps = false;
 
-    protected $fillable = [
-        'disease_history',
-        'current_symptoms'
+    protected $guarded = [
+        'id'
     ];
 
     public function society()
     {
         return $this->belongsTo(Society::class);
+    }
+    public function doctor()
+    {
+        return $this->belongsTo(Medical::class, 'doctor_id');
     }
 }
