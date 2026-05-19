@@ -29,7 +29,7 @@ class VaccinationController extends Controller
         $vaccinations = Vaccination::with([
             'spot.regional',
             'vaccine',
-            'vaccinator'
+            'vacinator'
         ])
             ->where('society_id', $society->id)
             ->get();
@@ -67,8 +67,8 @@ class VaccinationController extends Controller
 
         // validation
         $validator = Validator::make($request->all(), [
+            'date' => 'required|date_format:Y-m-d',
             'spot_id' => 'required|exists:spots,id',
-            'date' => 'required|date_format:Y-m-d'
         ]);
 
         if ($validator->fails()) {
@@ -78,6 +78,7 @@ class VaccinationController extends Controller
             ], 401);
         }
 
+        // dd($society->consultation);
         // consultation check
         $consultation = $society->consultation;
 
@@ -128,6 +129,7 @@ class VaccinationController extends Controller
             ->whereDate('date', $request->date)
             ->count() + 1;
 
+        dd($queue);
         Vaccination::create([
             'dose' => $dose,
             'date' => $request->date,

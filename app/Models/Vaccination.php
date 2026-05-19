@@ -20,7 +20,7 @@ class Vaccination extends Model
     }
     public function vacinator()
     {
-        return $this->belongsTo(Medical::class);
+        return $this->belongsTo(Medical::class, 'doctor_id');
     }
     public function regional()
     {
